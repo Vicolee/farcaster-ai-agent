@@ -103,6 +103,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import yargs from "yargs";
 import {dominosPlugin} from "@elizaos/plugin-dominos";
+import * as http from 'http';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
@@ -1061,6 +1062,18 @@ const startAgents = async () => {
         "Run `pnpm start:client` to start the client and visit the outputted URL (http://localhost:5173) to chat with your agents. When running multiple agents, use client with different port `SERVER_PORT=3001 pnpm start:client`"
     );
 };
+
+// Add basic HTTP server to satisfy Render's port requirement
+const port = process.env.PORT || 3000;
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('Farcaster AI Agent is running');
+});
+
+server.listen(port, () => {
+    elizaLogger.info(`Health check server listening on port ${port}`);
+});
 
 startAgents().catch((error) => {
     elizaLogger.error("Unhandled error in startAgents:", error);

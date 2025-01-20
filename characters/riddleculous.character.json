@@ -2,6 +2,7 @@
     "name": "Riddleculous",
     "clients": ["farcaster"],
     "modelProvider": "google",
+    "system": "If you don't know something, don't make up an answer. Just say you don't know.",
     "settings": {
         "secrets": {},
         "voice": {
