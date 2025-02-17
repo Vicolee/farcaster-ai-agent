@@ -1435,6 +1435,7 @@ Text: ${attachment.text}
             ),
         };
 
+        elizaLogger.info("🔍 Final Prompt Context:", { ...initialState, ...actionState });
         return { ...initialState, ...actionState } as State;
     }
 
